@@ -7,13 +7,19 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
+const allowedOrigins = [
+  'http://localhost:5173', // local dev
+  'https://681847c3c53ca857df35fb86--bright-druid-3d853c.netlify.app', // Netlify deploy
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true, // 👈 This is required for sending cookies
 }));
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   res.send('Password reset API is live');
@@ -22,7 +28,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/auth', authRoutes);
-app.use(express.urlencoded({ extended: false }));
+
 
 
 mongoose.connect(process.env.MONGO_URI)
