@@ -5,9 +5,10 @@ import authenticate from '../middleware/authenticate.js';
 const router = express.Router();
 
 router.post('/signup', signupUser);
+router.post('/login', loginUser);
 router.post('/request-reset', requestReset);
 router.post('/reset-password/:token', resetPassword);
-router.post('/login', loginUser);
+
 router.get('/me',authenticate, me);
 
 
