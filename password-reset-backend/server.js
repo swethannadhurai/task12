@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const allowedOrigins = [
   'http://localhost:5173', // local dev
-  'https://68187329128f2be8e2a22f3d--delicate-strudel-a36ef0.netlify.app/', // Netlify deploy
+  'https://68187a6d57b29a288ad81ebd--delicate-strudel-a36ef0.netlify.app/', // Netlify deploy
 ];
 
 app.use(cors({
