@@ -1,9 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
-import Login from './pages/login';
-import Dashboard from './pages/Dashboard';
 import Signup from './pages/Signup';
+
+import Dashboard from './pages/Dashboard';
+import Login from './pages/login';
+
+
 
 export default function App() {
   return (
@@ -18,4 +21,6 @@ export default function App() {
     </Router>
   );
 }
+
+
 
