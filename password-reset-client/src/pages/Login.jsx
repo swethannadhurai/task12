@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"; // make sure axios is imported
 import API_BASE_URL from '../config';
 
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -63,6 +64,12 @@ export default function Login() {
           Login
         </button>
       </form>
+      <p className="mt-4 text-center text-sm text-gray-600">
+      Don’t have an account?{" "}
+      <Link to="/signup" className="text-blue-500 underline hover:text-blue-700">
+        Sign up
+      </Link>
+      </p>
     </div>
   );
 }
