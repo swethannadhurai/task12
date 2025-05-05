@@ -66,17 +66,23 @@ export const loginUser = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
+    // Set the token in an HTTP-only cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // use HTTPS in production
+      sameSite: 'Strict', // or 'Lax' depending on your needs
+      maxAge: 60 * 60 * 1000 // 1 hour
+    });
+
     console.log(`✅ Login successful for ${email}`);
 
-
-    res.json({ token });
+    res.status(200).json({ message: 'Login successful' });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Something went wrong' });
   }
 };
 
-// controllers/authController.js
 
 export const me = async (req, res) => {
   try {
