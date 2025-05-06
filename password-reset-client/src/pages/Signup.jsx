@@ -18,7 +18,10 @@ const Signup = () => {
       await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
         email,
         password,
-      });
+
+      },{
+      withCredentials: true // crucial if backend has credentials: true
+     })
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");

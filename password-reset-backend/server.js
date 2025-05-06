@@ -7,13 +7,10 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
-const allowedOrigins = [
-'http://localhost:5173', 
-'https://6819a21cba11b05832a97256--soft-sunshine-020931.netlify.app'
-];
+
 
 app.use(cors({
-origin: allowedOrigins,
+origin: "https://6819a21cba11b05832a97256--soft-sunshine-020931.netlify.app",
 credentials: true, 
 }));
 
