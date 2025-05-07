@@ -9,10 +9,27 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors({
+/*app.use(cors({
 origin: "https://6819a21cba11b05832a97256--soft-sunshine-020931.netlify.app",
 credentials: true, 
+}));*/
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://6819a21cba11b05832a97256--soft-sunshine-020931.netlify.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
+
 
 app.use(cookieParser());
 app.use(express.json());

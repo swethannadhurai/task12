@@ -1,75 +1,59 @@
-// src/pages/Login.jsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios"; // make sure axios is imported
-import API_BASE_URL from '../config';
-
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-  
     try {
-      const res = await axios.post(
-        `${API_BASE_URL}/api/auth/login`,
-      
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true, // <-- Required to include cookies (like JWT token)
-        }
-      );
-  
-      navigate("/dashboard");
-    } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password });
+      alert('Login successful');
+      navigate('/dashboard');
+    } catch (error) {
+      alert('Login failed: ' + (error.response?.data?.message || 'Something went wrong'));
     }
   };
-  
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-2xl mb-4">Log In</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
-          className="w-full mb-3 p-2 border rounded"
           type="email"
-          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 border rounded"
+          placeholder="Enter your email"
           required
         />
         <input
-          className="w-full mb-3 p-2 border rounded"
           type="password"
-          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-2 border rounded"
+          placeholder="Enter your password"
           required
         />
-        <button
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-          type="submit"
-        >
-          Login
+        <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">
+          Log In
         </button>
       </form>
-      <p className="mt-4 text-center text-sm text-gray-600">
-      Don’t have an account?{" "}
-      <Link to="/signup" className="text-blue-500 underline hover:text-blue-700">
-        Sign up
-      </Link>
-      </p>
+      <div className="mt-4">
+        Forgot your password?{' '}
+        <Link to="/forgot-password" className="text-blue-600 hover:underline">
+          Reset it here
+        </Link>
+      </div>
+      <div className="mt-2">
+        Don't have an account?{' '}
+        <Link to="/" className="text-blue-600 hover:underline">
+          Sign Up
+        </Link>
+      </div>
     </div>
   );
 }
