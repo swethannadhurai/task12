@@ -3,13 +3,18 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ResetPassword() {
+  console.log("Deploying...");
   const { token } = useParams();
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`/api/auth/reset-password/${token}`, { password });
+     // await axios.post(`/api/auth/reset-password/${token}`, { password });
+     // await axios.post(`http://localhost:4000/api/auth/reset-password/${token}`, { password });
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/reset-password/${token}`, { password });
+
+
       alert('Password reset successfully');
     } catch (error) {
       alert('Failed to reset password');
