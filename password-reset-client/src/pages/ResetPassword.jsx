@@ -12,7 +12,7 @@ export default function ResetPassword() {
     try {
      // await axios.post(`/api/auth/reset-password/${token}`, { password });
      // await axios.post(`http://localhost:4000/api/auth/reset-password/${token}`, { password });
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/reset-password/${token}`, { password });
+      await axios.post(`https://task12-4-f8f4.onrender.com/api/auth/reset-password/${token}`, { password });
 
 
       alert('Password reset successfully');

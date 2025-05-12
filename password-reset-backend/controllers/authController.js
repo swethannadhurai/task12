@@ -69,8 +69,8 @@ export const loginUser = async (req, res) => {
     // Set the token in an HTTP-only cookie
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // use HTTPS in production
-      sameSite: 'none', // or 'Lax' depending on your needs
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'none', 
       maxAge: 60 * 60 * 1000 // 1 hour
     });
 
@@ -114,7 +114,7 @@ export const signupUser = async (req, res) => {
 
     await User.create({ email, password: hashedPassword });
 
-    // Immediate response
+    
     res.status(201).json({ message: 'User created successfully' });
   } catch (err) {
     res.status(500).json({ message: 'Signup failed', error: err.message });
