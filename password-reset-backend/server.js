@@ -21,7 +21,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin:'https://681b62b63ee14a0008e5a887--soft-sunshine-020931.netlify.app',
+  origin:'https://soft-sunshine-020931.netlify.app',
   credentials: true,
 }));
 
