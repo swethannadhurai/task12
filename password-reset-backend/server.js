@@ -21,13 +21,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin:'https://681b62b63ee14a0008e5a887--soft-sunshine-020931.netlify.app',
   credentials: true,
 }));
 
